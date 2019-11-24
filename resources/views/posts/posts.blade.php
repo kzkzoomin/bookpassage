@@ -14,6 +14,7 @@
                 </div>
                 <div>
                     @if (Auth::id() == $post->user_id)
+                        {!! link_to_route('posts.edit', 'このメッセージを編集', ['id' => $post->id], ['class' => 'btn btn-light']) !!}
                         {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete']) !!}
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
                         {!! Form::close() !!}

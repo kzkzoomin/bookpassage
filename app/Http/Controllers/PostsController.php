@@ -54,10 +54,33 @@ class PostsController extends Controller
         return redirect('/');
     }
     
+    // 更新画面表示処理
+    public function edit($id)
+    {
+        $post = Post::find($id);
+
+        return view('posts.edit', [
+            'post' => $post,
+        ]);
+    }
+    
+    // 更新処理
+    public function update(Request $request, $id)
+    {
+        $post = Post::find($id);
+        $post->sentence = $request->sentence;
+        $post->book_title = $request->book_title;
+        $post->book_author = $request->book_author;
+        $post->comment = $request->comment;
+        $post->save();
+        
+        return redirect('/');
+    }
+    
     // 削除
     public function destroy($id)
     {
-        $post = \App\Post::find($id);
+        $post = Post::find($id);
 
         if (\Auth::id() === $post->user_id) {
             $post->delete();

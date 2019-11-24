@@ -17,7 +17,11 @@ Route::get('/', 'PostsController@index');
 Route::get('posts/create', 'PostsController@create')->name('posts.create');
 // store: 投稿処理
 Route::post('posts/create', 'PostsController@store')->name('posts.store');
-// destroy: 投稿処理
+// edit: 編集用のフォームページ
+Route::get('posts/edit/{id}', 'PostsController@edit')->name('posts.edit');
+// update: 更新処理
+Route::put('posts/edit/{id}', 'PostsController@update')->name('posts.update');
+// destroy: 削除処理
 Route::delete('posts/{id}', 'PostsController@destroy')->name('posts.destroy');
 
 // ユーザ登録
