@@ -41,5 +41,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('unfollow', 'UserFollowController@destroy')->name('user.unfollow');
         Route::get('followings', 'UsersController@followings')->name('users.followings');
         Route::get('followers', 'UsersController@followers')->name('users.followers');
+        Route::get('favorites', 'UsersController@favorites')->name('users.favorites');    // fav取得
+    });
+    
+    // favとunfav操作
+    Route::group(['prefix' => 'posts/{id}'], function () {
+        Route::post('like', 'FavoritesController@store')->name('favorites.like');
+        Route::delete('unlike', 'FavoritesController@destroy')->name('favorites.unlike');
     });
 });

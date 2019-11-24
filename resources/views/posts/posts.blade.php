@@ -13,10 +13,11 @@
                     <p class="mb-0">コメント：{!! nl2br(e($post->comment)) !!}</p>
                 </div>
                 <div>
+                    @include('favorites.favorite_button', ['user' => $user])
                     @if (Auth::id() == $post->user_id)
-                        {!! link_to_route('posts.edit', 'このメッセージを編集', ['id' => $post->id], ['class' => 'btn btn-light']) !!}
+                        {!! link_to_route('posts.edit', '投稿を編集', ['id' => $post->id], ['class' => 'btn btn-light']) !!}
                         {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete']) !!}
-                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                            {!! Form::submit('削除', ['class' => 'btn btn-danger btn-sm']) !!}
                         {!! Form::close() !!}
                     @endif
                 </div>

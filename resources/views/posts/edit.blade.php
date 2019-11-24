@@ -25,7 +25,7 @@
                     {!! Form::text('comment', null, ['class' => 'form-control']) !!}
                 </div>
         
-                {!! Form::submit('投稿', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('編集', ['class' => 'btn btn-primary']) !!}
         
             {!! Form::close() !!}
         </div>

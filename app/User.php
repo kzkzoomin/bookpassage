@@ -93,4 +93,46 @@ class User extends Authenticatable
         $follow_user_ids[] = $this->id;
         return Post::whereIn('user_id', $follow_user_ids);
     }
+    
+    // ふぁぼ定義
+    public function favorites()
+    {
+        return $this->belongsToMany(Post::class, 'favorites', 'user_id', 'post_id')->withTimestamps();
+    }
+    
+    // ふぁぼる
+    public function like($postId){
+        // 既にふぁぼってるか確認
+        $exist = $this->liked($postId);
+        
+        if ($exist) {
+            // 既にふぁぼってれば何もしない
+            return false;
+        } else {
+            // 未ふぁぼであれば登録する
+            $this->favorites()->attach($postId);
+            return true;
+        }
+    }
+    
+    // あんふぁぼ
+    public function unlike($postId){
+        // 既にふぁぼってるか確認
+        $exist = $this->liked($postId);
+        
+        if ($exist) {
+            // 既にふぁぼってればふぁぼ解除
+            $this->favorites()->detach($postId);
+            return true;
+        } else {
+            // 未ふぁぼであればなにもしない
+            return false;
+        }
+    }
+    
+    // ふぁぼっている状態判定
+    public function liked($postId)
+    {
+        return $this->favorites()->where('post_id', $postId)->exists();
+    }
 }

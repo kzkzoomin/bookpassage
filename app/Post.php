@@ -12,4 +12,10 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+    // ふぁぼ多対多定義
+    public function favorites_users()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'post_id', 'user_id')->withTimestamps();
+    }
 }
