@@ -5,6 +5,8 @@
     <div class="card-body">
         <img class="rounded img-fluid" src="{{ Gravatar::src($user->email, 500) }}" alt="">
     </div>
-    {!! link_to_route('posts.create', '新規投稿', [], ['class' => 'btn btn-primary']) !!}
+    @if (Auth::id() == $user->id)
+        {!! link_to_route('posts.create', '新規投稿', [], ['class' => 'btn btn-primary']) !!}
+    @endif
 </div>
 @include('user_follow.follow_button', ['user' => $user])
