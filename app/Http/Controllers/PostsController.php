@@ -67,6 +67,14 @@ class PostsController extends Controller
     // 更新処理
     public function update(Request $request, $id)
     {
+        // 191211追加（空欄でシステムエラーが起きていた）
+        $this->validate($request, [
+            'sentence' => 'required|max:191',
+            'book_title' => 'required|max:191',
+            'book_author' => 'required|max:191',
+            'comment' => 'required|max:191',
+        ]);
+        
         $post = Post::find($id);
         $post->sentence = $request->sentence;
         $post->book_title = $request->book_title;
